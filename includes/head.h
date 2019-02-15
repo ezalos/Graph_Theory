@@ -6,7 +6,7 @@
 /*   By: ldevelle <ldevelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 16:48:06 by ldevelle          #+#    #+#             */
-/*   Updated: 2019/02/14 19:33:52 by ldevelle         ###   ########.fr       */
+/*   Updated: 2019/02/15 13:51:45 by ldevelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 typedef struct			s_vertice
 {
 	char				*name;
+	int					serial_nb;
 	char				**attributes;
 	struct s_edge		*edg;
 }						t_ver;

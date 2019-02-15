@@ -6,7 +6,7 @@
 /*   By: ldevelle <ldevelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/20 12:12:02 by ldevelle          #+#    #+#             */
-/*   Updated: 2019/02/14 19:50:59 by ldevelle         ###   ########.fr       */
+/*   Updated: 2019/02/15 14:00:35 by ldevelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	*create_struct(void *ptr, size_t size)
 	printf("%s\n", __func__);
 	if (!(ptr = malloc(size)))
 		return (NULL);
-	ft_bzero(ptr, size);
+	ft_bzero((char*)ptr, size);
+	printf("done\n");
 	return(ptr);
 }
 
@@ -27,12 +28,25 @@ t_ver	*create_vertice(char *name)
 	t_ver	*ptr;
 
 	ptr = NULL;
-	if (!(create_struct(ptr, sizeof(t_ver))))
+
+
+	if (!(ptr = (t_ver*)malloc(sizeof(t_ver))))
 		return (NULL);
+	ft_bzero(ptr, sizeof(t_ver));
+
+/*	if (!(ptr = create_struct(ptr, sizeof(t_ver))))
+		return (NULL);*/
 	god->ver[god->q_ver++] = ptr;
+	printf("strdup\n");
 	ptr->name = ft_strdup(name);
-	if (!(create_struct(ptr->edg, sizeof(t_edg))))
+	printf("done\n");
+
+	if (!(ptr->edg = (t_edg*)malloc(sizeof(t_edg))))
 		return (NULL);
+	ft_bzero(ptr->edg, sizeof(t_edg));
+
+/*	if (!(create_struct(ptr->edg, sizeof(t_edg))))
+		return (NULL);*/
 	ptr->edg->owner = ptr;
 	return (ptr);
 }
@@ -70,8 +84,15 @@ void		print_god_vert(void)
 	int i;
 
 	i = -1;
-	while (++i > god->q_ver)
+	C_PURPLE
+	printf("There is %d vertices\n", god->q_ver);
+	C_PINK
+	while (++i < god->q_ver)
+	{
 		printf("%d\t->%s\n", i, god->ver[i]->name);
+		god->ver[i]->serial_nb = i;
+	}
+	C_RESET
 }
 
 void	*link_vertices(void)
@@ -80,20 +101,28 @@ void	*link_vertices(void)
 	char	*ver_one;
 	char	*ver_two;
 
+	print_god_vert();
+	C_YELLOW
 	printf("Please choose 2 vertices\n");
+	C_RESET
+	C_CYAN
 	if (0 >= get_next_line(0, &ver_one))
 		return (NULL);
 	if (0 >= get_next_line(0, &ver_two))
 		return (NULL);
+	C_RESET
 	while (ver_one[0] != '\0' || ver_two[0] != '\0')
 	{
 		add_ver_in_edg(god->ver[ft_atoi(ver_one)], god->ver[ft_atoi(ver_two)]);
 		ft_strdel(&ver_one);
 		ft_strdel(&ver_two);
+		print_god_vert();
+		C_CYAN
 		if (0 >= get_next_line(0, &ver_one))
 			return (NULL);
 		if (0 >= get_next_line(0, &ver_two))
 			return (NULL);
+		C_RESET
 	}
 	return (god);
 }
@@ -107,14 +136,25 @@ void	*first_init(void)
 		return(NULL);
 	if (!(god->ver = (t_ver**)malloc(sizeof(t_ver*) * TOTAL_VERTICES)))
 		return (NULL);
+	C_ORANGE
+	printf("Please name your new vetice\n");
+	C_CYAN
 	if (0 >= get_next_line(0, &instruction))
 		return (NULL);
+	C_RESET
 	while (instruction[0] != '\0')
 	{
+		C_MAGENTA
+		printf("Here's the string: %s\n", instruction);
+		C_RESET
 		create_vertice(instruction);
 		ft_strdel(&instruction);
+		C_ORANGE
+		printf("Please name your new vetice\n");
+		C_CYAN
 		if (0 >= get_next_line(0, &instruction))
 			return (NULL);
+		C_RESET
 	}
 	return (god);
 }

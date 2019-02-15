@@ -6,7 +6,7 @@
 /*   By: ldevelle <ldevelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/20 12:12:02 by ldevelle          #+#    #+#             */
-/*   Updated: 2019/02/15 14:00:35 by ldevelle         ###   ########.fr       */
+/*   Updated: 2019/02/15 17:12:38 by ldevelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,27 @@ t_ver	*create_vertice(char *name)
 	return (ptr);
 }
 
-void	*add_ver_in_edg(t_ver *v0, t_ver *v1)
+void	add_ver_in_edg(t_ver *v0, t_ver *v1)
 {
 	printf("%s\n", __func__);
+
+	if (!v0->edg->ver)
+		v0->edg->ver = ft_lstnew_ptr(v1, sizeof(v1));
+	else
+		ft_lstadd(&v0->edg->ver, ft_lstnew_ptr(v1, sizeof(v1)));
+	v0->edg->qlink++;
+
+	if (!v1->edg->ver)
+		v1->edg->ver = ft_lstnew_ptr(v0, sizeof(v0));
+	else
+		ft_lstadd(&v1->edg->ver, ft_lstnew_ptr(v0, sizeof(v0)));
+	v1->edg->qlink++;
+
+	//ft_lstadd(&v1->edg->ver, ft_lstnew_ptr(v0, sizeof(v0)));
+	//v1->edg->qlink++;
+
+
+/*
 	t_ver	**tmp;
 	int		i;
 
@@ -75,7 +93,33 @@ void	*add_ver_in_edg(t_ver *v0, t_ver *v1)
 	free(v1->edg->ver);
 	v1->edg->ver = tmp;
 
-	return (v0->edg->ver);
+	return (v0->edg->ver);*/
+}
+
+void		print_links(t_ver *v0)
+{
+	//printf("%s\n", __func__);
+	t_ver	*tmp;
+	t_list	*vo;
+	int		i;
+
+	i = 0;
+	if (v0->edg->qlink)
+	{
+		//ft_putstr("1");
+		while (++i < v0->edg->qlink)
+		{
+			//ft_putstr("2");
+			vo = ft_find_lsth(v0->edg->ver, i);
+			//printf("%p\n", vo);
+			tmp = vo->content;
+			C_GREEN
+			//ft_putstr("3");
+			printf("%d->%s\t", tmp->serial_nb, tmp->name);
+			C_RESET
+		}
+	}
+	//ft_putstr("4");
 }
 
 void		print_god_vert(void)
@@ -86,13 +130,16 @@ void		print_god_vert(void)
 	i = -1;
 	C_PURPLE
 	printf("There is %d vertices\n", god->q_ver);
-	C_PINK
 	while (++i < god->q_ver)
 	{
-		printf("%d\t->%s\n", i, god->ver[i]->name);
+		C_PINK
+		printf("%d\t: %s\t", i, god->ver[i]->name);
+		C_RESET
 		god->ver[i]->serial_nb = i;
+		if (god->ver[i]->edg->qlink)
+			print_links(god->ver[i]);
+		printf("\n");
 	}
-	C_RESET
 }
 
 void	*link_vertices(void)

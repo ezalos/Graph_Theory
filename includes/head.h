@@ -6,7 +6,7 @@
 /*   By: ldevelle <ldevelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 16:48:06 by ldevelle          #+#    #+#             */
-/*   Updated: 2019/02/15 13:51:45 by ldevelle         ###   ########.fr       */
+/*   Updated: 2019/02/15 16:19:06 by ldevelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct			s_edge
 	struct s_vertice	*owner;
 	int					qlink;
 	char				**attributes;
-	struct s_vertice	**ver;
+	t_list				*ver;
 }						t_edg;
 
 typedef struct			s_god

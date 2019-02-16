@@ -6,7 +6,7 @@
 /*   By: ldevelle <ldevelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 16:48:06 by ldevelle          #+#    #+#             */
-/*   Updated: 2019/02/15 16:19:06 by ldevelle         ###   ########.fr       */
+/*   Updated: 2019/02/16 14:56:50 by ldevelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdio.h>
 # include "../../libft/libft.h"
 
-# define TOTAL_VERTICES 10
+# define TOTAL_VERTICES 100
 
 typedef struct			s_vertice
 {
@@ -44,6 +44,21 @@ typedef struct			s_god
 	int					q_edg_at;
 }						t_god;
 
-static t_god			*god;
+//INIT
+t_god		*first_init(void);
+
+//CREATE
+void		*create_struct(void *ptr, size_t size);
+t_ver		*create_vertice(t_god *god, char *name);
+
+//LINK
+void		*link_vertices(t_god *god);
+void		add_vers_in_edgs(t_ver *v0, t_ver *v1);
+void		add_ver_in_edg(t_ver *v0, t_ver *v1);
+
+//PRINT
+void		print_links(t_god *god, t_ver *v0);
+void		print_god_vert(t_god *god);
+
 
 #endif

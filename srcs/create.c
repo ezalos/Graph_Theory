@@ -6,7 +6,7 @@
 /*   By: ldevelle <ldevelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/16 14:17:21 by ldevelle          #+#    #+#             */
-/*   Updated: 2019/02/16 14:50:38 by ldevelle         ###   ########.fr       */
+/*   Updated: 2019/02/16 19:18:23 by ldevelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,13 @@ t_ver	*create_vertice(t_god *god, char *name)
 
 	if (!(ptr = (t_ver*)malloc(sizeof(t_ver))))
 		return (NULL);
-	printf("plop\n");
 	ft_bzero((char*)ptr, sizeof(t_ver));
-	printf("yopl\n");
 /*	if (!(ptr = create_struct(ptr, sizeof(t_ver))))
 		return (NULL);*/
+	ptr->serial_nb = god->q_ver;
 	god->ver[god->q_ver++] = ptr;
 	printf("strdup\n");
 	ptr->name = ft_strdup(name);
-	printf("done\n");
 
 	if (!(ptr->edg = (t_edg*)malloc(sizeof(t_edg))))
 		return (NULL);
@@ -49,5 +47,6 @@ t_ver	*create_vertice(t_god *god, char *name)
 /*	if (!(create_struct(ptr->edg, sizeof(t_edg))))
 		return (NULL);*/
 	ptr->edg->owner = ptr;
+	printf("%p|->%s[%d]\n", ptr, ptr->name, ptr->serial_nb);
 	return (ptr);
 }

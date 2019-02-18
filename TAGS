@@ -1,0 +1,19 @@
+
+srcs/create.c,88
+void	*create_struct(create_struct15,923
+t_ver	*create_vertice(create_vertice25,1106
+
+srcs/init.c,37
+t_god	*first_init(first_init15,923
+
+srcs/link.c,103
+void		add_ver_in_edg(15,923
+void	add_vers_in_edgs(33,1270
+void	*link_vertices(link_vertices41,1397
+
+srcs/main.c,18
+int		main(15,923
+
+srcs/print.c,56
+void		print_links(15,923
+void		print_god_vert(39,1368

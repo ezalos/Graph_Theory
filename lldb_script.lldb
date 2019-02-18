@@ -1,0 +1,3 @@
+settings set target.input-path input.test
+
+b print_links

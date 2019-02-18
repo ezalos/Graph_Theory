@@ -6,7 +6,7 @@
 /*   By: ldevelle <ldevelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/16 14:19:22 by ldevelle          #+#    #+#             */
-/*   Updated: 2019/02/16 15:12:42 by ldevelle         ###   ########.fr       */
+/*   Updated: 2019/02/16 21:14:26 by ldevelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void		add_ver_in_edg(t_ver *v0, t_ver *v1)
 	if (!v0->edg->ver)
 	{
 		printf("if NULL\n");
-		v0->edg->ver = ft_lstnew_ptr(v1, sizeof(v1));
+		v0->edg->ver = ft_lstnew_ptr(v1, sizeof(*v1));
 	}
 	else
 	{
 		printf("if !NULL\n");
-		ft_lstadd_end(v0->edg->ver, ft_lstnew_ptr(v1, sizeof(v1)));
+		ft_lstadd_end(v0->edg->ver, ft_lstnew_ptr(v1, sizeof(*v1)));
 	}
 	v0->edg->qlink++;
 	printf("%dqlink: %d\n", v0->serial_nb, v0->edg->qlink);
@@ -51,8 +51,10 @@ void	*link_vertices(t_god *god)
 	C_CYAN
 	if (0 >= get_next_line(0, &ver_one))
 		return (NULL);
+	printf("ver_one: |%s|\n", ver_one);
 	if (0 >= get_next_line(0, &ver_two))
 		return (NULL);
+	printf("ver_two: |%s|\n", ver_two);
 	C_RESET
 	while (ver_one[0] != '\0' || ver_two[0] != '\0')
 	{
@@ -64,8 +66,10 @@ void	*link_vertices(t_god *god)
 		C_CYAN
 		if (0 >= get_next_line(0, &ver_one))
 			return (NULL);
+		printf("ver_one: |%s|\n", ver_one);
 		if (0 >= get_next_line(0, &ver_two))
 			return (NULL);
+		printf("ver_two: |%s|\n", ver_two);
 		C_RESET
 	}
 	return (god);

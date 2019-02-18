@@ -6,7 +6,7 @@
 #    By: ldevelle <ldevelle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/12 15:04:16 by ldevelle          #+#    #+#              #
-#    Updated: 2019/02/16 21:13:23 by ldevelle         ###   ########.fr        #
+#    Updated: 2019/02/16 14:23:32 by ldevelle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = graph_theory
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = #-Wall -Wextra -Werror
 
 DFLAGS = -Wall -Wextra -Werror -fsanitize=address,undefined -g3 -pedantic\
 -O2 -Wchar-subscripts -Wcomment -Wformat=2 -Wimplicit-int\
@@ -135,11 +135,7 @@ endef
 ##						##
 ##########################
 
-all :	 submodule $(NAME)
-
-submodule:
-		make -C $(LIB_DIR)
-
+all :	$(NAME)
 
 $(NAME): $(A_OBJ) $(HEAD_PATH)
 		@$(MAKE) -C $(LIB_DIR)
@@ -162,7 +158,7 @@ aclean : clean
 afclean : aclean fclean
 		@$(MAKE) fclean -C $(LIB_DIR)
 
-re : fclean all
+re :	fclean all
 
 are :	afclean all
 

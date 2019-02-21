@@ -6,7 +6,7 @@
 /*   By: ldevelle <ldevelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 17:30:52 by ldevelle          #+#    #+#             */
-/*   Updated: 2019/02/19 12:58:11 by ldevelle         ###   ########.fr       */
+/*   Updated: 2019/02/21 13:36:35 by ldevelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ void		print_god_vert(t_god *god)
 	int len;
 	int tmp;
 
+	CLEAR_SCREEN
+	CURSOR_RESET
 	C_PURPLE
-	printf("There is %d vertices\n", god->q_ver);
+	printf("There are %d vertices\n", god->q_ver);
 	C_RESET
 	i = -1;
 	len = 0;

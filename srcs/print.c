@@ -6,7 +6,7 @@
 /*   By: ldevelle <ldevelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 17:30:52 by ldevelle          #+#    #+#             */
-/*   Updated: 2019/02/16 21:16:05 by ldevelle         ###   ########.fr       */
+/*   Updated: 2019/02/19 12:58:11 by ldevelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,31 @@ void		print_links(t_god *god, t_ver *v0)
 
 void		print_god_vert(t_god *god)
 {
-	printf("%s\n", __func__);
+	//printf("%s\n", __func__);
 	int i;
+	int len;
+	int tmp;
 
 	C_PURPLE
 	printf("There is %d vertices\n", god->q_ver);
+	C_RESET
+	i = -1;
+	len = 0;
+	while (++i < god->q_ver)
+		if (len < (tmp = ft_strlen(god->ver[i]->name)))
+			len = tmp;
 	i = -1;
 	while (++i < god->q_ver)
 	{
+		ft_putnbr( god->ver[i]->serial_nb);
 		C_PINK
-		printf("%d\t: %s\t", god->ver[i]->serial_nb, god->ver[i]->name);
+		ft_putstr("\t: ");
+		ft_putstr(god->ver[i]->name);
+		//printf("%d\t: %s", god->ver[i]->serial_nb, god->ver[i]->name);
+		ft_puttab(god->ver[i]->name, len + 1);
 		C_RESET
 		//god->ver[i]->serial_nb = i;
-		//if (god->ver[i]->edg->qlink)
+		if (god->ver[i]->edg->qlink)
 			print_links(god, god->ver[i]);
 		printf("\n");
 	}

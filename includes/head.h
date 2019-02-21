@@ -6,7 +6,7 @@
 /*   By: ldevelle <ldevelle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 16:48:06 by ldevelle          #+#    #+#             */
-/*   Updated: 2019/02/16 14:56:50 by ldevelle         ###   ########.fr       */
+/*   Updated: 2019/02/19 14:06:58 by ldevelle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ typedef struct			s_god
 	int					q_edg;
 	int					q_edg_at;
 }						t_god;
+
+//PARSING
+int			parsing(t_god *god);
 
 //INIT
 t_god		*first_init(void);
